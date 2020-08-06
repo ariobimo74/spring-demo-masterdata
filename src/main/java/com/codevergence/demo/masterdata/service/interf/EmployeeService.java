@@ -20,6 +20,9 @@ public interface EmployeeService
 
     List<EmployeeDto> getEmployeeByPlacementId(long placementId);
 
+    List<EmployeeDto> getAllEmployee(@Param(value = "theNpk") String theNpk,
+                                     @Param(value = "theName") String theName);
+
     List<EmployeeDto> getAllEmployee(long theTypeId, long thePlacementId);
 
     List<EmployeeDto> getAllEmployee(String orderType,

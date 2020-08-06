@@ -52,19 +52,26 @@ public class EmployeeRest
         return new ResponseEntity<>(employeeService.getAllEmployee(typeId, placementId), HttpStatus.OK);
     }
 
+    @GetMapping(path = "advancedsearch")
+    public ResponseEntity<?> getAllEmployee(@RequestParam(value = "theNpk") String theNpk,
+                                            @RequestParam(value = "theName") String theName)
+    {
+        return new ResponseEntity<>(employeeService.getAllEmployee(theNpk, theName), HttpStatus.OK);
+    }
+
     @GetMapping(path = "/paging/name/{ordertype}")
-    public List<EmployeeDto> getAllEmployee(@PathVariable(value = "ordertype") String orderType,
+    public ResponseEntity<?> getAllEmployee(@PathVariable(value = "ordertype") String orderType,
                                             @RequestParam(value = "offset") int offset,
                                             @RequestParam(value = "fetch") int fetch)
     {
-        return employeeService.getAllEmployee(orderType, offset, fetch);
+        return new ResponseEntity<>(employeeService.getAllEmployee(orderType, offset, fetch), HttpStatus.OK);
     }
 
     @GetMapping(path = "pagerow/name")
-    public List<EmployeeDto> getAllEmployee(@RequestParam(value = "rpg") int rpg,
+    public ResponseEntity<?> getAllEmployee(@RequestParam(value = "rpg") int rpg,
                                             @RequestParam(value = "page") int page)
     {
-        return employeeService.getAllEmployee(rpg, page);
+        return new ResponseEntity<>(employeeService.getAllEmployee(rpg, page), HttpStatus.OK);
     }
 
     @PostMapping(path = "/{userName}")

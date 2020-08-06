@@ -75,6 +75,19 @@ query = "SELECT employee.id, employee.npk, employee.name, employee.office_email 
         "AND employee_type.id = :theTypeId\n" +
         "AND placement.id = :thePlacementId", resultSetMapping = "employeeMapping")
 
+@NamedNativeQuery(name = "Employee.getAllEmployeeAdvancedSearch",
+query = "SELECT employee.id, employee.npk, employee.name, employee.office_email AS officeEmail, employee_type.id AS typeId, employee_type.name AS typeName, placement.id AS placementId, placement.name AS placementName\n" +
+        "FROM employee AS employee\n" +
+        "LEFT JOIN employee_type AS employee_type\n" +
+        "ON employee.employee_type_id = employee_type.id\n" +
+        "LEFT JOIN placement AS placement\n" +
+        "ON employee.placement_id = placement.id\n" +
+        "WHERE employee.is_delete = 0\n" +
+        "AND employee_type.is_delete = 0\n" +
+        "AND placement.is_delete = 0\n" +
+        "AND employee.npk LIKE LOWER(concat('%',:theNpk,'%'))\n" +
+        "AND employee.name LIKE LOWER(CONCAT('%',:theName,'%'))\n", resultSetMapping = "employeeMapping")
+
 @NamedNativeQuery(name = "Employee.getAllEmployeePaginateAsc",
 query = "SELECT employee.id, employee.npk, employee.name, employee.office_email AS officeEmail, employee_type.id AS typeId, employee_type.name AS typeName, placement.id AS placementId, placement.name AS placementName\n" +
         "FROM employee AS employee\n" +

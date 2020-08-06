@@ -27,6 +27,10 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long>
     List<EmployeeDto> getAllEmployeeSearch(long theTypeId, long thePlacementId);
 
     @Query(nativeQuery = true)
+    List<EmployeeDto> getAllEmployeeAdvancedSearch(@Param(value = "theNpk") String theNpk,
+                                                   @Param(value = "theName") String theName);
+
+    @Query(nativeQuery = true)
     List<EmployeeDto> getAllEmployeePaginateAsc(@Param(value = "offset") int offset,
                                                 @Param(value = "fetch") int fetch);
 

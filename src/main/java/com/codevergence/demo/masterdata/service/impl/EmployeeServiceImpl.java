@@ -75,6 +75,11 @@ public class EmployeeServiceImpl implements EmployeeService
     }
 
     @Override
+    public List<EmployeeDto> getAllEmployee(String theNpk, String theName) {
+        return employeeRepository.getAllEmployeeAdvancedSearch(theNpk, theName);
+    }
+
+    @Override
     public List<EmployeeDto> getAllEmployee(String orderType, int offset, int fetch)
     {
         int theFetch = fetch - offset;
