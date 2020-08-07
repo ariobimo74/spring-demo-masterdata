@@ -1,7 +1,6 @@
 package com.codevergence.demo.masterdata.controller.rest;
 
 import com.codevergence.demo.masterdata.model.dto.EmployeeAddDto;
-import com.codevergence.demo.masterdata.model.dto.EmployeeDto;
 import com.codevergence.demo.masterdata.model.entity.Employee;
 import com.codevergence.demo.masterdata.service.interf.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,10 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
-@RequestMapping(path = "/rest/employee")
+@RequestMapping(path = "/employees")
 public class EmployeeRest
 {
     @Autowired
@@ -31,7 +28,7 @@ public class EmployeeRest
         {
             return new ResponseEntity<>(employeeService.getById(id), HttpStatus.OK);
         }
-        return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(null, HttpStatus.OK);
     }
 
     @GetMapping(path = "/employeetype/{typeid}")
@@ -61,15 +58,15 @@ public class EmployeeRest
 
     @GetMapping(path = "/paging/name/{ordertype}")
     public ResponseEntity<?> getAllEmployee(@PathVariable(value = "ordertype") String orderType,
-                                            @RequestParam(value = "offset") int offset,
-                                            @RequestParam(value = "fetch") int fetch)
+                                            @RequestParam(value = "offset", defaultValue = "0") int offset,
+                                            @RequestParam(value = "fetch", defaultValue = "1") int fetch)
     {
         return new ResponseEntity<>(employeeService.getAllEmployee(orderType, offset, fetch), HttpStatus.OK);
     }
 
     @GetMapping(path = "pagerow/name")
-    public ResponseEntity<?> getAllEmployee(@RequestParam(value = "rpg") int rpg,
-                                            @RequestParam(value = "page") int page)
+    public ResponseEntity<?> getAllEmployee(@RequestParam(value = "rpg", defaultValue = "1") int rpg,
+                                            @RequestParam(value = "page", defaultValue = "1") int page)
     {
         return new ResponseEntity<>(employeeService.getAllEmployee(rpg, page), HttpStatus.OK);
     }
@@ -82,7 +79,7 @@ public class EmployeeRest
         return employeeService.addEmployee(userName, employeeAddDto);
     }
 
-    @PatchMapping(path = "/{userName}")
+    @PutMapping(path = "/{userName}")
     @ResponseStatus(HttpStatus.OK)
     public Employee editEmployee(@PathVariable(value = "userName") String userName,
                                  @RequestBody EmployeeAddDto employeeAddDto)
