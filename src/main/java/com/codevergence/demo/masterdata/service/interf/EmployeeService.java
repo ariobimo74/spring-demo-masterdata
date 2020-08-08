@@ -31,9 +31,9 @@ public interface EmployeeService
 
     List<EmployeeDto> getAllEmployee(int rpg, int page);
 
-    Employee addEmployee(String userName, EmployeeAddDto employeeAddDto);
+    Employee addEmployee(EmployeeAddDto employeeAddDto);
 
-    Employee editEmployee(String userName, EmployeeAddDto employeeAddDto);
+    Employee editEmployee(long id, EmployeeAddDto employeeAddDto);
 
     Employee deleteEmployee(long id, String userMail);
 }

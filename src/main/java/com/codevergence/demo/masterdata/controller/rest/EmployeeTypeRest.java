@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(path = "/rest/employeetype")
+@RequestMapping(path = "/employeetypes")
 public class EmployeeTypeRest
 {
     @Autowired

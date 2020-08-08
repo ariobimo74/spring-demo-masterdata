@@ -31,7 +31,7 @@ public class EmployeeRest
         return new ResponseEntity<>(null, HttpStatus.OK);
     }
 
-    @GetMapping(path = "/employeetype/{typeid}")
+    @GetMapping(path = "/employee_type/{typeid}")
     public ResponseEntity<?> getEmployeeByTypeId(@PathVariable(value = "typeid") long typeid)
     {
         return new ResponseEntity<>(employeeService.getEmployeeByTypeId(typeid), HttpStatus.OK);
@@ -43,20 +43,21 @@ public class EmployeeRest
         return new ResponseEntity<>(employeeService.getEmployeeByPlacementId(placementId), HttpStatus.OK);
     }
 
-    @GetMapping(path = "/search/{typeid}/{placementid}")
-    public ResponseEntity<?> getAllEmployee(@PathVariable(value = "typeid") long typeId, @PathVariable(value = "placementid") long placementId)
+    @GetMapping(path = "/search/type_id/{typeid}/placement_id/{placementid}")
+    public ResponseEntity<?> getAllEmployee(@PathVariable(value = "typeid") long typeId,
+                                            @PathVariable(value = "placementid") long placementId)
     {
         return new ResponseEntity<>(employeeService.getAllEmployee(typeId, placementId), HttpStatus.OK);
     }
 
-    @GetMapping(path = "advancedsearch")
+    @GetMapping(path = "search")
     public ResponseEntity<?> getAllEmployee(@RequestParam(value = "theNpk") String theNpk,
                                             @RequestParam(value = "theName") String theName)
     {
         return new ResponseEntity<>(employeeService.getAllEmployee(theNpk, theName), HttpStatus.OK);
     }
 
-    @GetMapping(path = "/paging/name/{ordertype}")
+    @GetMapping(path = "/page/name/{ordertype}")
     public ResponseEntity<?> getAllEmployee(@PathVariable(value = "ordertype") String orderType,
                                             @RequestParam(value = "offset", defaultValue = "0") int offset,
                                             @RequestParam(value = "fetch", defaultValue = "1") int fetch)
@@ -64,30 +65,29 @@ public class EmployeeRest
         return new ResponseEntity<>(employeeService.getAllEmployee(orderType, offset, fetch), HttpStatus.OK);
     }
 
-    @GetMapping(path = "pagerow/name")
+    @GetMapping(path = "pagerow/name/asc")
     public ResponseEntity<?> getAllEmployee(@RequestParam(value = "rpg", defaultValue = "1") int rpg,
                                             @RequestParam(value = "page", defaultValue = "1") int page)
     {
         return new ResponseEntity<>(employeeService.getAllEmployee(rpg, page), HttpStatus.OK);
     }
 
-    @PostMapping(path = "/{userName}")
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Employee addEmployee(@PathVariable(value = "userName") String userName,
-                                @RequestBody EmployeeAddDto employeeAddDto)
+    public Employee addEmployee(@RequestBody EmployeeAddDto employeeAddDto)
     {
-        return employeeService.addEmployee(userName, employeeAddDto);
+        return employeeService.addEmployee(employeeAddDto);
     }
 
-    @PutMapping(path = "/{userName}")
+    @PutMapping(path = "/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Employee editEmployee(@PathVariable(value = "userName") String userName,
+    public Employee editEmployee(@PathVariable(value = "id") long id,
                                  @RequestBody EmployeeAddDto employeeAddDto)
     {
-        return employeeService.editEmployee(userName, employeeAddDto);
+        return employeeService.editEmployee(id, employeeAddDto);
     }
 
-    @DeleteMapping("/{userName}/{id}")
+    @DeleteMapping(path = "/{userName}/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public Employee deleteEmployee(@PathVariable(value = "id") long id,
                                    @PathVariable(value = "userName") String userName)

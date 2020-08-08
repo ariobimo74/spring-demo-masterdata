@@ -103,10 +103,10 @@ public class EmployeeServiceImpl implements EmployeeService
     }
 
     @Override
-    public Employee addEmployee(String userName, EmployeeAddDto employeeAddDto)
+    public Employee addEmployee(EmployeeAddDto employeeAddDto)
     {
         Employee employee = new Employee();
-        employee.setCreatedBy(userName);
+        employee.setCreatedBy(employeeAddDto.getCreatedBy());
         employee.setCreatedDate(new Date());
         employee.setDelete(false);
         employee.setNpk(employeeAddDto.getNpk());
@@ -123,10 +123,10 @@ public class EmployeeServiceImpl implements EmployeeService
     }
 
     @Override
-    public Employee editEmployee(String userName, EmployeeAddDto employeeAddDto)
+    public Employee editEmployee(long id, EmployeeAddDto employeeAddDto)
     {
-        Employee employee = employeeRepository.findById(employeeAddDto.getId()).get();
-        employee.setModifiedBy(userName);
+        Employee employee = employeeRepository.findById(id).get();
+        employee.setModifiedBy(employeeAddDto.getCreatedBy());
         employee.setModifiedDate(new Date());
         employee.setName(employeeAddDto.getName());
         employee.setNpk(employeeAddDto.getNpk());
