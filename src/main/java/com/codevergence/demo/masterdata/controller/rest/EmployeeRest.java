@@ -1,8 +1,11 @@
 package com.codevergence.demo.masterdata.controller.rest;
 
+import com.codevergence.demo.masterdata.exception.employee.BadRequestException;
+import com.codevergence.demo.masterdata.exception.employee.EmployeeNotFoundException;
 import com.codevergence.demo.masterdata.model.dto.EmployeeAddDto;
+import com.codevergence.demo.masterdata.model.dto.EmployeeDto;
 import com.codevergence.demo.masterdata.model.entity.Employee;
-import com.codevergence.demo.masterdata.service.interf.EmployeeService;
+import com.codevergence.demo.masterdata.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +17,7 @@ public class EmployeeRest
 {
     @Autowired
     private EmployeeService employeeService;
+    private Object EmployeeNotFoundException;
 
     @GetMapping
     public ResponseEntity<?> getAll()
@@ -21,14 +25,18 @@ public class EmployeeRest
         return new ResponseEntity<>(employeeService.getAll(), HttpStatus.OK);
     }
 
-    @GetMapping(path = "/{id}")
-    public ResponseEntity<?> getById(@PathVariable(value = "id") long id)
+    @GetMapping(path = "/{value}")
+    public EmployeeDto getById(@PathVariable(value = "value") String value)
     {
-        if (employeeService.getById(id).isPresent())
+        try
         {
-            return new ResponseEntity<>(employeeService.getById(id), HttpStatus.OK);
+            long id = Long.parseLong(value);
+            return employeeService.getById(id).orElseThrow(() -> new EmployeeNotFoundException(id));
         }
-        return new ResponseEntity<>(null, HttpStatus.OK);
+        catch (NumberFormatException e)
+        {
+            throw new BadRequestException(value);
+        }
     }
 
     @GetMapping(path = "/employee_type/{typeid}")

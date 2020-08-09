@@ -2,7 +2,7 @@ package com.codevergence.demo.masterdata.service.impl;
 
 import com.codevergence.demo.masterdata.model.entity.Placement;
 import com.codevergence.demo.masterdata.repository.PlacementRepository;
-import com.codevergence.demo.masterdata.service.interf.PlacementService;
+import com.codevergence.demo.masterdata.service.PlacementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,4 @@
-package com.codevergence.demo.masterdata.service.interf;
+package com.codevergence.demo.masterdata.service;
 
 import com.codevergence.demo.masterdata.model.entity.Placement;
 

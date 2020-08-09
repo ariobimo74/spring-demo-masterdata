@@ -1,5 +1,7 @@
 package com.codevergence.demo.masterdata.model.entity;
 
+import com.codevergence.demo.masterdata.model.Common;
+
 import javax.persistence.*;
 
 @Entity

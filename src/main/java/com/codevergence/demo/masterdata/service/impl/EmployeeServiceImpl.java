@@ -8,7 +8,7 @@ import com.codevergence.demo.masterdata.model.entity.Placement;
 import com.codevergence.demo.masterdata.repository.EmployeeRepository;
 import com.codevergence.demo.masterdata.repository.EmployeeTypeRepository;
 import com.codevergence.demo.masterdata.repository.PlacementRepository;
-import com.codevergence.demo.masterdata.service.interf.EmployeeService;
+import com.codevergence.demo.masterdata.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

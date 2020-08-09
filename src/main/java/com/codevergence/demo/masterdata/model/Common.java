@@ -1,4 +1,4 @@
-package com.codevergence.demo.masterdata.model.entity;
+package com.codevergence.demo.masterdata.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 

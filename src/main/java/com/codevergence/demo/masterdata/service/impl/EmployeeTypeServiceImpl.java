@@ -2,7 +2,7 @@ package com.codevergence.demo.masterdata.service.impl;
 
 import com.codevergence.demo.masterdata.model.entity.EmployeeType;
 import com.codevergence.demo.masterdata.repository.EmployeeTypeRepository;
-import com.codevergence.demo.masterdata.service.interf.EmployeeTypeService;
+import com.codevergence.demo.masterdata.service.EmployeeTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

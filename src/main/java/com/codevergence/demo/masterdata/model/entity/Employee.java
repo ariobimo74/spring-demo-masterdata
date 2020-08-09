@@ -1,5 +1,6 @@
 package com.codevergence.demo.masterdata.model.entity;
 
+import com.codevergence.demo.masterdata.model.Common;
 import com.codevergence.demo.masterdata.model.dto.EmployeeDto;
 
 import javax.persistence.*;
